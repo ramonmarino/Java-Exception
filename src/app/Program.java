@@ -2,6 +2,7 @@ package app;
 
 import model.entities.Reservation;
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,16 +35,14 @@ public class Program {
             System.out.print("Digite a data de saida do Check-out (dd/MM/yyyy): ");
              checkOut = sdf.parse(input.next());
 
-             Date now = new Date();
-             if(checkIn.before(now) || checkOut.before(now)){
-                 System.out.println("Erro na reserva: As datas na reserva para atualização devem ser datas futuras.");
 
-             }else if(!checkOut.after(checkIn)){
-                 System.out.print("Erro na reserva: O check-out deve ser depois do check-in.");
+           String erro = reserva.UpdateDates(checkIn,checkOut);
+           if(erro != null) {
+               System.out.println("Erro na reserva." + erro);
+           }else{
+               System.out.println("Reerva: " + reserva);
 
-             }else{
-             reserva.UpdateDates(checkIn,checkOut);
-             System.out.println("Reserva:" + reserva);
+                System.out.println("Reserva:" + reserva);
 
              }
 
